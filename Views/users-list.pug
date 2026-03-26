@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  .card
+    .card-header.bg-primary.text-white.d-flex.justify-content-between.align-items-center
+      h3.mb-0
+        i.fas.fa-users.me-2
+        | User List
+      span.badge.bg-light.text-dark Total: #{users.length} users
+    
+    .card-body
+      if users && users.length > 0
+        .table-responsive
+          table.table.table-hover.table-striped
+            thead.table-dark
+              tr
+                th #
+                th Full Name
+                th Email
+                th Phone
+                th City
+                th Country
+                th Date of Birth
+                th Actions
+            tbody
+              each user, index in users
+                tr
+                  td #{index + 1}
+                  td 
+                    strong #{user.firstName} #{user.lastName}
+                  td #{user.email}
+                  td #{user.phoneNumber}
+                  td #{user.city}
+                  td #{user.country}
+                  td #{user.dateOfBirth.toISOString().split('T')[0]}
+                  td
+                    a.btn.btn-sm.btn-warning(href=`/edit-user/${user._id}`)
+                      i.fas.fa-edit
+                      |  Edit
+      else
+        .text-center.py-5
+          i.fas.fa-user-slash.fa-3x.text-muted.mb-3
+          h4.text-muted No users found
+          p Click the "Add User" button to create your first user
+          a.btn.btn-primary(href="/add-user")
+            i.fas.fa-plus-circle.me-2
+            | Add First User

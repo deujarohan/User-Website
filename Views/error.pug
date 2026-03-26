@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .row.justify-content-center
+    .col-md-6
+      .card.text-center
+        .card-header(class=title.includes('404') ? 'bg-warning' : 'bg-danger', class="text-white")
+          h3.mb-0
+            i.fas.fa-exclamation-triangle.me-2
+            | #{title}
+        
+        .card-body
+          i(class=title.includes('404') ? 'fas fa-search fa-4x text-warning mb-3' : 'fas fa-bug fa-4x text-danger mb-3')
+          h4 #{message}
+          p.text-muted.mt-3 Something went wrong. Please try again.
+          
+          .d-grid.gap-2.mt-4
+            a.btn.btn-primary(href="/users-list")
+              i.fas.fa-home.me-2
+              | Go to User List
+            a.btn.btn-secondary(href="/add-user")
+              i.fas.fa-plus-circle.me-2
+              | Add New User

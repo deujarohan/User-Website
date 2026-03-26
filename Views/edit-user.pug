@@ -1,0 +1,166 @@
+extends layout
+
+block content
+  .row.justify-content-center
+    .col-md-8.col-lg-7
+      .card
+        .card-header.bg-warning.text-dark
+          h3.mb-0
+            i.fas.fa-edit.me-2
+            | Edit User
+          p.mb-0 Edit user information or delete the user
+        
+        .card-body
+          form(id="editUserForm")
+            input(type="hidden", id="userId", value=user._id)
+            
+            .row
+              .col-md-6.mb-3
+                label.form-label.required(for="firstName") First Name
+                input.form-control(type="text", id="firstName", name="firstName", value=user.firstName, required)
+              
+              .col-md-6.mb-3
+                label.form-label.required(for="lastName") Last Name
+                input.form-control(type="text", id="lastName", name="lastName", value=user.lastName, required)
+            
+            .mb-3
+              label.form-label.required(for="dateOfBirth") Date of Birth
+              input.form-control(type="date", id="dateOfBirth", name="dateOfBirth", value=formattedDate, required)
+            
+            .mb-3
+              label.form-label.required(for="address1") Address Line 1
+              input.form-control(type="text", id="address1", name="address1", value=user.address1, required)
+            
+            .mb-3
+              label.form-label(for="address2") Address Line 2 (Optional)
+              input.form-control(type="text", id="address2", name="address2", value=user.address2)
+            
+            .row
+              .col-md-6.mb-3
+                label.form-label.required(for="city") City
+                input.form-control(type="text", id="city", name="city", value=user.city, required)
+              
+              .col-md-6.mb-3
+                label.form-label.required(for="postalCode") Postal Code
+                input.form-control(type="text", id="postalCode", name="postalCode", value=user.postalCode, required)
+            
+            .row
+              .col-md-6.mb-3
+                label.form-label.required(for="country") Country
+                input.form-control(type="text", id="country", name="country", value=user.country, required)
+              
+              .col-md-6.mb-3
+                label.form-label.required(for="phoneNumber") Phone Number
+                input.form-control(type="tel", id="phoneNumber", name="phoneNumber", value=user.phoneNumber, required)
+            
+            .mb-3
+              label.form-label.required(for="email") Email Address
+              input.form-control(type="email", id="email", name="email", value=user.email, required)
+            
+            .mb-3
+              label.form-label(for="userNotes") User Notes
+              textarea.form-control(id="userNotes", name="userNotes", rows="3") #{user.userNotes}
+            
+            .d-grid.gap-2
+              button.btn.btn-primary(type="submit")
+                i.fas.fa-save.me-2
+                | Update User
+              
+              button.btn.btn-danger(type="button", id="deleteBtn")
+                i.fas.fa-trash-alt.me-2
+                | Delete User
+              
+              a.btn.btn-secondary(href="/users-list")
+                i.fas.fa-times.me-2
+                | Cancel
+          
+          #alertMessage.alert(style="display: none;")
+
+block scripts
+  script.
+    const userId = document.getElementById('userId').value;
+    const form = document.getElementById('editUserForm');
+    const alertDiv = document.getElementById('alertMessage');
+    const deleteBtn = document.getElementById('deleteBtn');
+    
+    // Update User
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        dateOfBirth: document.getElementById('dateOfBirth').value,
+        address1: document.getElementById('address1').value,
+        address2: document.getElementById('address2').value || '',
+        city: document.getElementById('city').value,
+        postalCode: document.getElementById('postalCode').value,
+        country: document.getElementById('country').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        email: document.getElementById('email').value,
+        userNotes: document.getElementById('userNotes').value || ''
+      };
+      
+      try {
+        const response = await fetch(`/users/${userId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          alertDiv.className = 'alert alert-success mt-3';
+          alertDiv.innerHTML = `<i class="fas fa-check-circle me-2"></i> ${data.message || 'User updated successfully! Redirecting...'}`;
+          alertDiv.style.display = 'block';
+          
+          setTimeout(() => {
+            window.location.href = '/users-list';
+          }, 1500);
+        } else {
+          let errorMsg = data.message || 'Failed to update user';
+          if (data.errors && data.errors.length > 0) {
+            errorMsg = data.errors.map(err => err.msg).join(', ');
+          }
+          alertDiv.className = 'alert alert-danger mt-3';
+          alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> ${errorMsg}`;
+          alertDiv.style.display = 'block';
+        }
+      } catch (error) {
+        alertDiv.className = 'alert alert-danger mt-3';
+        alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> Connection error: ${error.message}`;
+        alertDiv.style.display = 'block';
+      }
+    });
+    
+    // Delete User
+    deleteBtn.addEventListener('click', async () => {
+      if (confirm('Are you sure you want to delete this user? This action cannot be undone!')) {
+        try {
+          const response = await fetch(`/users/${userId}`, {
+            method: 'DELETE'
+          });
+          
+          const data = await response.json();
+          
+          if (response.ok) {
+            alertDiv.className = 'alert alert-success mt-3';
+            alertDiv.innerHTML = `<i class="fas fa-check-circle me-2"></i> ${data.message || 'User deleted successfully! Redirecting...'}`;
+            alertDiv.style.display = 'block';
+            
+            setTimeout(() => {
+              window.location.href = '/users-list';
+            }, 1500);
+          } else {
+            alertDiv.className = 'alert alert-danger mt-3';
+            alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> ${data.message || 'Failed to delete user'}`;
+            alertDiv.style.display = 'block';
+          }
+        } catch (error) {
+          alertDiv.className = 'alert alert-danger mt-3';
+          alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> Connection error: ${error.message}`;
+          alertDiv.style.display = 'block';
+        }
+      }
+    });
