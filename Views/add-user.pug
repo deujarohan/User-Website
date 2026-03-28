@@ -93,7 +93,7 @@ block scripts
       };
       
       try {
-        const response = await fetch('/users', {
+        const response = await fetch('/users/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
