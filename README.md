@@ -49,27 +49,35 @@ A complete CRUD (Create, Read, Update, Delete) web application for managing user
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-user website/
-├─ config/
-│ └─ db.js
-├─ Model/
-│ └─ User.js
-├─ public/
-├─ Routes/
-│ └─ users.js
-├─ Views/
-│ ├─ add-user.pug
-│ ├─ edit-user.pug
-│ ├─ error.pug
-│ ├─ layout.pug
-│ └─ users-list.pug
-├─ .env
-├─ index.js
-├─ package-lock.json
-├─ package.json
-└─ README.md
+user-website/
+│
+├── config/
+│ └── db.js # MongoDB connection configuration
+│
+├── Model/
+│ └── User.js # User schema and model definition
+│
+├── public/ # Static files (CSS, JS, images)
+│
+├── Routes/
+│ └── users.js # API routes with CRUD operations
+│
+├── views/
+│ ├── layout.pug # Base template with navigation
+│ ├── add-user.pug # Page 1: Add user form
+│ ├── users-list.pug # Page 2: Display all users
+│ ├── edit-user.pug # Page 3: Edit/delete user
+│ └── error.pug # 404 and error page
+│
+├── .env # Environment variables (not in repo)
+├── .env.example # Example environment variables
+├── .gitignore # Git ignore rules
+├── index.js # Main application entry point
+├── package.json # NPM dependencies and scripts
+├── package-lock.json # Locked dependency versions
+└── README.md # Project documentation
 
 ---
 
