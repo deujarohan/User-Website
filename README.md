@@ -51,20 +51,21 @@ A complete CRUD (Create, Read, Update, Delete) web application for managing user
 
 ## Project Structure
 
+````bash
 user-website/
 ├── config/
-│ └── db.js
+│   └── db.js
 ├── Model/
-│ └── User.js
+│   └── User.js
 ├── public/
 ├── Routes/
-│ └── users.js
+│   └── users.js
 ├── views/
-│ ├── layout.pug
-│ ├── add-user.pug
-│ ├── users-list.pug
-│ ├── edit-user.pug
-│ └── error.pug
+│   ├── layout.pug
+│   ├── add-user.pug
+│   ├── users-list.pug
+│   ├── edit-user.pug
+│   └── error.pug
 ├── .env
 ├── .env.example
 ├── .gitignore
@@ -103,4 +104,4 @@ user-website/
 ```bash
 # Extract the ZIP file to your desired location
 cd C0957767_FirstAssignment
-```
+````
