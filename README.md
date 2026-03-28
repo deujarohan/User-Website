@@ -49,9 +49,10 @@ A complete CRUD (Create, Read, Update, Delete) web application for managing user
 
 ---
 
+````markdown
 ## Project Structure
 
-````bash
+```bash
 user-website/
 ├── config/
 │   └── db.js
@@ -74,6 +75,9 @@ user-website/
 ├── package-lock.json
 └── README.md
 ```
+
+````
+
 ---
 
 ## Technologies Used
@@ -104,4 +108,5 @@ user-website/
 ```bash
 # Extract the ZIP file to your desired location
 cd C0957767_FirstAssignment
+````
 ````
