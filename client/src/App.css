@@ -1,0 +1,160 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   src/App.css
+   Author: Rohan Deuja | C0957767
+   Global styles for the UserManager React app.
+───────────────────────────────────────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* ── Theme Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --primary: #4f46e5;
+  --bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Navbar ──────────────────────────────────────────────────────────────────── */
+.app-navbar {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px 0;
+}
+.active-link {
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+
+/* ── Page Wrapper ────────────────────────────────────────────────────────────── */
+.page-wrapper {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+/* ── Page Header ─────────────────────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.page-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* ── AG Grid ─────────────────────────────────────────────────────────────────── */
+.grid-container {
+  height: 520px;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.grid-actions button {
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* ── Form Card ───────────────────────────────────────────────────────────────── */
+.form-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.ev-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* ── Login Page ──────────────────────────────────────────────────────────────── */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 24px;
+}
+.login-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.login-header h1 {
+  font-size: 3rem;
+}
+.login-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 8px;
+}
+.login-header p {
+  color: var(--muted);
+  margin-top: 4px;
+}
+.login-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-top: 16px;
+}
+
+/* ── Loading / Error ─────────────────────────────────────────────────────────── */
+.loading-screen,
+.error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+  color: var(--muted);
+}
